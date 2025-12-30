@@ -6,7 +6,28 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  // write your code here
+  const result = {};
+
+  sourceString
+    .split(';')
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0)
+    .forEach((declaration) => {
+      const colonIndex = declaration.indexOf(':');
+
+      if (colonIndex === -1) {
+        return result;
+      }
+
+      const key = declaration.slice(0, colonIndex).trim();
+      const value = declaration.slice(colonIndex + 1).trim();
+
+      if (key.length > 0) {
+        result[key] = value;
+      }
+    });
+
+  return result;
 }
 
 module.exports = convertToObject;
