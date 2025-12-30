@@ -6,7 +6,7 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  const result = {};
+  const cssProperties = {};
 
   sourceString
     .split(';')
@@ -16,18 +16,18 @@ function convertToObject(sourceString) {
       const colonIndex = declaration.indexOf(':');
 
       if (colonIndex === -1) {
-        return result;
+        return cssProperties;
       }
 
       const key = declaration.slice(0, colonIndex).trim();
       const value = declaration.slice(colonIndex + 1).trim();
 
       if (key.length > 0) {
-        result[key] = value;
+        cssProperties[key] = value;
       }
     });
 
-  return result;
+  return cssProperties;
 }
 
 module.exports = convertToObject;
